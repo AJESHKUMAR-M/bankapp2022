@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -16,15 +17,27 @@ export class HomeComponent implements OnInit {
   pass1=""
   amount1=""
 
-  constructor(private ds:DataService) { }
+//homeform
+ 
+homeFormDep=this.fb.group({
+  acno: ['', [Validators.required, Validators.pattern('[0-9 ]*')]],
+  pass:['', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]],
+  amount:['', [Validators.required, Validators.pattern('[0-9 ]*')]]
+ })
+ homeFormWit=this.fb.group({
+  acno1: ['', [Validators.required, Validators.pattern('[0-9 ]*')]],
+  pass1:['', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]],
+  amount1:['', [Validators.required, Validators.pattern('[0-9 ]*')]]
+ })
+  constructor(private ds:DataService,private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
 
   deposit(){
-    var acno=this.acno
-    var pass=this.pass
-    var amount=this.amount
+    var acno=this.homeFormDep.value.acno
+    var pass=this.homeFormDep.value.pass
+    var amount=this.homeFormDep.value.amount
 
     const result=this.ds.deposit(acno,pass,amount)
 
@@ -35,9 +48,9 @@ export class HomeComponent implements OnInit {
   }
 
   withdraw(){
-    var acno=this.acno1
-    var pass=this.pass1
-    var amount=this.amount1
+    var acno=this.homeFormWit.value.acno1
+    var pass=this.homeFormWit.value.pass1
+    var amount=this.homeFormWit.value.amount1
 
     const result=this.ds.withdraw(acno,pass,amount)
 

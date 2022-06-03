@@ -15,34 +15,41 @@
                   
               </div>
               <div class="card-body">
-                  <form (ngSubmit)="deposit()" >
+                  <form [formGroup]="homeFormDep" (ngSubmit)="deposit()" >
                    
 
                       <div class="input-group form-group">
                           <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-user"></i></span>
                           </div>
-                          <input type="text" class="form-control" name="acno" [(ngModel)]="acno"  placeholder="enter account number " id="login_accno" required>
+                          <input type="text" class="form-control" name="acno" formControlName="acno"  placeholder="enter account number " id="login_accno" required>
                           <!-- (change)="acnoChange($event)" -->
                           <!-- #acno   : template variable methode -->
                       </div>
+                      <div *ngIf="this.homeFormDep.get('acno')?.touched&&this.homeFormDep.get('acno')?.errors" style="color: rgb(236, 10, 10)">INVALID ACCOUNT NUMBER</div>
+
+                      
                       <div class="input-group form-group">
                           <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-key"></i></span>
                           </div>
-                          <input type="password" class="form-control" name="pswd" [(ngModel)]="pass"  placeholder="password" id="login_password" required>
+                          <input type="password" class="form-control" name="pswd" formControlName="pass"  placeholder="password" id="login_password" required>
                           <!-- (change)="pswdChange($event)" -->
                           <!-- #pswd  : template variable methode -->
                       </div>
+                      <div *ngIf="this.homeFormDep.get('pass')?.touched&&this.homeFormDep.get('pass')?.errors" style="color: rgb(236, 10, 10)">INVALID PASSWORD</div>
+
 
                       <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" name="amount" [(ngModel)]="amount"  placeholder="amount" id="login_user" required>
+                        <input type="text" class="form-control" name="amount" formControlName="amount"  placeholder="amount" id="login_user" required>
                        
                     </div>
-                      
+                    
+                    <div *ngIf="this.homeFormDep.get('amount')?.touched&&this.homeFormDep.get('amount')?.errors" style="color: rgb(236, 10, 10)">INVALID AMOUNT</div>
+
                       <div class="form-group">
                           <input type="submit" value="Deposit"   class="btn float-right login_btn " style="width:50%" >
                       </div>
@@ -62,33 +69,39 @@
                 
             </div>
             <div class="card-body">
-                <form (ngSubmit)="withdraw()"  >
+                <form [formGroup]="homeFormWit" (ngSubmit)="withdraw()"  >
                  
 
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" name="acno" [(ngModel)]="acno1"  placeholder="enter account number " id="login_accno1" required>
+                        <input type="text" class="form-control" name="acno" formControlName="acno1"  placeholder="enter account number " id="login_accno1" required>
                         <!-- (change)="acnoChange($event)" -->
                         <!-- #acno   : template variable methode -->
                     </div>
+                    <div *ngIf="this.homeFormWit.get('acno1')?.touched&&this.homeFormWit.get('acno1')?.errors" style="color: rgb(236, 10, 10)">INVALID ACCOUNT NUMBER</div>
+
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" class="form-control" name="pswd" [(ngModel)]="pass1"  placeholder="password" id="login_password1" required>
+                        <input type="password" class="form-control" name="pswd" formControlName="pass1"  placeholder="password" id="login_password1" required>
                         <!-- (change)="pswdChange($event)" -->
                         <!-- #pswd  : template variable methode -->
                     </div>
+                    <div *ngIf="this.homeFormWit.get('pass1')?.touched&&this.homeFormWit.get('pass1')?.errors" style="color: rgb(236, 10, 10)">INVALID PASSWORD</div>
+
 
                     <div class="input-group form-group">
                       <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-user"></i></span>
                       </div>
-                      <input type="text" class="form-control" name="amount" [(ngModel)]="amount1"  placeholder="amount" id="login_user1" required>
+                      <input type="text" class="form-control" name="amount" formControlName="amount1"  placeholder="amount" id="login_user1" required>
                      
                   </div>
+                  <div *ngIf="this.homeFormWit.get('amount1')?.touched&&this.homeFormWit.get('amount1')?.errors" style="color: rgb(236, 10, 10)">INVALID AMOUNT</div>
+
                     
                     <div class="form-group">
                         <input type="submit" value="withdraw"  class="btn float-right login_btn " style="width:50%" >

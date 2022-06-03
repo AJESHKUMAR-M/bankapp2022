@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -12,8 +13,14 @@ export class LoginComponent implements OnInit {
  accno="WRITE YOUR ACCOUNT NUMBER"
  acno=""
  pass=""
+
+ //formbuilder
+ loginForm=this.fb.group({
+  acno: ['', [Validators.required, Validators.pattern('[0-9 ]*')]],
+  pass:['', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]]
+ })
  
-  constructor(private routing:Router,private ds:DataService) { }
+  constructor(private routing:Router,private ds:DataService,private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
@@ -31,8 +38,8 @@ console.log(this.acno);
 
 
   login() {
-var acno=this.acno
-var pass=this.pass
+var acno=this.loginForm.value.acno
+var pass=this.loginForm.value.pass
 const result =this.ds.login(acno,pass)
 if(result){
  
