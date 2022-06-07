@@ -29,7 +29,10 @@ homeFormDep=this.fb.group({
   pass1:['', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]],
   amount1:['', [Validators.required, Validators.pattern('[0-9 ]*')]]
  })
-  constructor(private ds:DataService,private fb:FormBuilder) { }
+ user:any
+  constructor(private ds:DataService,private fb:FormBuilder) {
+  this.user=this.ds.curentUser
+   }
 
   ngOnInit(): void {
   }
@@ -38,12 +41,16 @@ homeFormDep=this.fb.group({
     var acno=this.homeFormDep.value.acno
     var pass=this.homeFormDep.value.pass
     var amount=this.homeFormDep.value.amount
-
+if(this.homeFormDep.valid){
     const result=this.ds.deposit(acno,pass,amount)
 
     if(result){
       alert(amount+" deposited successfully and new balance is"+result)
     }
+  }
+  else{
+    alert("INVALID FORM")
+  }
   
   }
 
@@ -51,12 +58,16 @@ homeFormDep=this.fb.group({
     var acno=this.homeFormWit.value.acno1
     var pass=this.homeFormWit.value.pass1
     var amount=this.homeFormWit.value.amount1
-
+if(this.homeFormWit.valid){
     const result=this.ds.withdraw(acno,pass,amount)
 
     if(result){
       alert(amount+" debited successfully and new balance is"+result)
     }
+  }
+  else{
+    alert("INVALID FORM")
+  }
   }
 
 

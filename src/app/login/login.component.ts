@@ -40,13 +40,19 @@ console.log(this.acno);
   login() {
 var acno=this.loginForm.value.acno
 var pass=this.loginForm.value.pass
+
+if(this.loginForm.valid){
+
 const result =this.ds.login(acno,pass)
 if(result){
  
     alert("login success")
     this.routing.navigateByUrl('home')
   }
-
+}
+else{
+  alert("INVALID FORM")
+}
   }
 
 
