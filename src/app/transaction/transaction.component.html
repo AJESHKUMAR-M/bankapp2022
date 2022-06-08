@@ -4,6 +4,8 @@
     <span class="quote text-light">Giving you freedom...</span>
   </nav>
 <h1 style="color:red">TRANSACTION HISTORY</h1>
+<button class="btn btn-primary"routerLink="/home" style=" margin-left:850px">HOME PAGE</button>
+
 <table style="color:white">
     <thead>
         <tr>
@@ -12,27 +14,15 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th>CREDIT</th>
-            <th>10000</th>
+        <tr *ngFor="let i of transaction">
+            <th>{{i.type}}</th>
+            <th>{{i.amount}}</th>
         </tr>
-        <tr>
-            <th>DEBIT</th>
-            <th>1000</th>
-        </tr>
-        <tr>
-            <th>CREDIT</th>
-            <th>1500</th>
-        </tr>
-        <tr>
-            <th>DEBIT</th>
-            <th>1300</th>
-        </tr>
+    
 
     </tbody>
    </table>
    <br>
    <br>
    
-   <button class="btn btn-primary"routerLink="/home" style="margin-left:700px">HOME PAGE</button>
 

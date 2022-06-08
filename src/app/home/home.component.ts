@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -30,11 +31,16 @@ homeFormDep=this.fb.group({
   amount1:['', [Validators.required, Validators.pattern('[0-9 ]*')]]
  })
  user:any
-  constructor(private ds:DataService,private fb:FormBuilder) {
+  constructor(private ds:DataService,private fb:FormBuilder,private routing:Router) {
   this.user=this.ds.curentUser
    }
 
   ngOnInit(): void {
+    if (!localStorage.getItem('curentAcno')) {
+      alert('Please Log In')
+      this.routing.navigateByUrl("")
+      
+    }
   }
 
   deposit(){
@@ -68,6 +74,11 @@ if(this.homeFormWit.valid){
   else{
     alert("INVALID FORM")
   }
+  }
+  logOut(){
+    localStorage.removeItem("curentUser")
+    localStorage.removeItem("curentAcno")
+this.routing.navigateByUrl("")
   }
 
 

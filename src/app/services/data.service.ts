@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
 curentUser:any
+curentAcno:any
   db:any={
     100:{"acno":100,"username":"Ronaldo","password":101,"balance":10000,transaction:[]},
     101:{"acno":101,"username":"messi","password":102,"balance":1000,transaction:[]},
@@ -17,12 +18,15 @@ curentUser:any
     this.getDetails()
    }
 //getting data from local storage
-getDetails(){
+  getDetails(){
   if(localStorage.getItem("database")){
     this.db=JSON.parse(localStorage.getItem("database")||'')
   }
   if(localStorage.getItem("curentUser")){
     this.curentUser=JSON.parse(localStorage.getItem("curentUser")||'')
+  }
+  if(localStorage.getItem("curentAcno")){
+    this.curentAcno=JSON.parse(localStorage.getItem("curentAcno")||'')
   }
 }
 
@@ -34,6 +38,9 @@ getDetails(){
     if(this.curentUser){
       localStorage.setItem("curentUser",JSON.stringify(this.curentUser))
     }
+    if(this.curentAcno){
+      localStorage.setItem("curentAcno",JSON.stringify(this.curentAcno))
+    }
   }
   login(acno:any,pass:any) {
   
@@ -42,6 +49,7 @@ getDetails(){
     if(acno in db){
       if(pass==db[acno]["password"]){
 this.curentUser=db[acno]["username"]
+this.curentAcno=acno
 this.saveDetails()
        return true
       
@@ -143,6 +151,9 @@ this.saveDetails()
       return false
     }
 
+  }
+  getTransaction(acno:any){
+    return this.db[acno].transaction
   }
   
 }
