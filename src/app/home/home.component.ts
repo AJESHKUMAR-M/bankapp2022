@@ -31,8 +31,10 @@ homeFormDep=this.fb.group({
   amount1:['', [Validators.required, Validators.pattern('[0-9 ]*')]]
  })
  user:any
+ lDate:any
   constructor(private ds:DataService,private fb:FormBuilder,private routing:Router) {
   this.user=this.ds.curentUser
+  this.lDate=new Date
    }
 
   ngOnInit(): void {

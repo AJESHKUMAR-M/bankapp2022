@@ -1,0 +1,5 @@
+<div [@openClose]="isOpen?'open':'close'">
+    <h5 style="color:white"> YOU CAN {{isOpen ? 'OPEN':"CLOSE"}} </h5>
+    
+</div>
+<button (click)="toggle()" class="btn btn-warning">TOGGLE</button>
